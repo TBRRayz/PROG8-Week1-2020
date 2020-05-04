@@ -1,13 +1,29 @@
 "use strict";
-class Bomb extends HTMLElement {
+class GameObject extends HTMLElement {
     constructor() {
         super();
+    }
+}
+class Bomb extends GameObject {
+    constructor() {
+        super();
+        this.posy = 0;
+        this.posx = 0;
         let foreground = document.getElementsByTagName("foreground")[0];
         foreground.appendChild(this);
-        this.posy = 200;
-        this.posx = 220;
+        this.posx = Math.floor(Math.random() * Math.floor(innerWidth));
+        this.speed = Math.floor(Math.random() * Math.floor(5) + 1);
     }
     update() {
+        if (this.posy > innerHeight + 200) {
+            this.posy = -200;
+            this.posx = Math.floor(Math.random() * Math.floor(innerWidth));
+            this.speed = Math.floor(Math.random() * Math.floor(5) + 1);
+        }
+        this.posy = this.posy + this.speed;
+        this.draw();
+    }
+    draw() {
         this.style.transform = `translate(${this.posx}px, ${this.posy}px)`;
     }
 }
@@ -17,10 +33,14 @@ class Car extends HTMLElement {
         super();
         let foreground = document.getElementsByTagName("foreground")[0];
         foreground.appendChild(this);
-        this.posx = 100;
-        this.posy = 350;
+        this.posx = 0;
+        this.posy = window.innerHeight - 150;
     }
     update() {
+        if (this.posx > window.innerWidth + 150) {
+            this.posx = -150;
+        }
+        this.posx++;
         this.style.transform = `translate(${this.posx}px, ${this.posy}px)`;
     }
 }
@@ -32,9 +52,14 @@ class Game {
         this.textfield = document.getElementsByTagName("textfield")[0];
         this.statusbar = document.getElementsByTagName("bar")[0];
         this.bomb = new Bomb();
+        this.car = new Car();
+        this.gameLoop();
     }
     gameLoop() {
         console.log("updating the game");
+        this.bomb.update();
+        this.car.update();
+        requestAnimationFrame(() => this.gameLoop());
     }
     destroyBuilding() {
         this.destroyed++;

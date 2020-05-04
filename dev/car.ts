@@ -2,6 +2,7 @@ class Car extends HTMLElement{
     
     private posx: number
     private posy: number
+    private speed: number
         
     constructor() {
         super()
@@ -12,6 +13,7 @@ class Car extends HTMLElement{
         
         this.posx = 0
         this.posy = window.innerHeight - 150
+    
         
     }
 
