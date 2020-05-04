@@ -1,7 +1,9 @@
-class Bomb extends HTMLElement{
+/// <reference path="gameobject.ts" />
+
+class Bomb extends GameObject{
     
-    private posy: number
-    private posx: number
+    private posy: number = 0
+    private posx: number = 0
         
     constructor() {
         super()
@@ -9,12 +11,21 @@ class Bomb extends HTMLElement{
         let foreground  = document.getElementsByTagName("foreground")[0]
         foreground.appendChild(this);
         
-        this.posy = 200
-        this.posx = 220
+        
     }
 
     public update():void {
+        if (this.posy > innerHeight + 200) {
+            this.posy = -200
+        }
+
+        this.posy++
+        this.draw()
+    }
+
+    public draw() {
         this.style.transform = `translate(${this.posx}px, ${this.posy}px)`
+
     }
 }
 

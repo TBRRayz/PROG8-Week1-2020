@@ -9,11 +9,17 @@ class Car extends HTMLElement{
         let foreground  = document.getElementsByTagName("foreground")[0]
         foreground.appendChild(this);
         
-        this.posx = 100
-        this.posy = 350
+        
+        this.posx = 0
+        this.posy = window.innerHeight - 150
+        
     }
 
     public update():void {
+        if (this.posx > window.innerWidth + 150) {
+            this.posx = -150
+        }
+        this.posx++
         this.style.transform = `translate(${this.posx}px, ${this.posy}px)`
     }
 }

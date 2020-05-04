@@ -5,20 +5,25 @@ class Game {
     private textfield: HTMLElement
     private statusbar: HTMLElement
     private bomb: Bomb
+    private car: Car
     
     constructor() {
         this.textfield  = document.getElementsByTagName("textfield")[0] as HTMLElement
         this.statusbar  = document.getElementsByTagName("bar")[0] as HTMLElement
 
         this.bomb       = new Bomb()
+        this.car = new Car()
         
-        // call method gameLoop
+        this.gameLoop()
+        
     }
     
     private gameLoop():void{
         console.log("updating the game")
+        this.bomb.update()
+        this.car.update()
+        requestAnimationFrame(() => this.gameLoop())
         
-        // add request animation frame
     }
 
     public destroyBuilding(){
