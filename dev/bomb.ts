@@ -14,18 +14,25 @@ class Bomb extends GameObject{
         
         this.posx = Math.floor(Math.random() * Math.floor(innerWidth))
         this.speed = Math.floor(Math.random() * Math.floor(5) + 1)
+        this.addEventListener("click", (e : MouseEvent) => this.handleMouseClick(e))
         
     }
 
     public update():void {
         if (this.posy > innerHeight + 200) {
-            this.posy = -200
+            this.posy = -400
             this.posx = Math.floor(Math.random() * Math.floor(innerWidth))
             this.speed = Math.floor(Math.random() * Math.floor(5) + 1)
         }
 
         this.posy = this.posy + this.speed
         this.draw()
+    }
+
+    private handleMouseClick(e:MouseEvent) {
+        this.posy = -400
+        this.posx = Math.floor(Math.random() * Math.floor(innerWidth))
+        this.speed = Math.floor(Math.random() * Math.floor(5) + 1)
     }
 
     public draw() {

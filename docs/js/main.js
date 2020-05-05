@@ -13,15 +13,21 @@ class Bomb extends GameObject {
         foreground.appendChild(this);
         this.posx = Math.floor(Math.random() * Math.floor(innerWidth));
         this.speed = Math.floor(Math.random() * Math.floor(5) + 1);
+        this.addEventListener("click", (e) => this.handleMouseClick(e));
     }
     update() {
         if (this.posy > innerHeight + 200) {
-            this.posy = -200;
+            this.posy = -400;
             this.posx = Math.floor(Math.random() * Math.floor(innerWidth));
             this.speed = Math.floor(Math.random() * Math.floor(5) + 1);
         }
         this.posy = this.posy + this.speed;
         this.draw();
+    }
+    handleMouseClick(e) {
+        this.posy = -400;
+        this.posx = Math.floor(Math.random() * Math.floor(innerWidth));
+        this.speed = Math.floor(Math.random() * Math.floor(5) + 1);
     }
     draw() {
         this.style.transform = `translate(${this.posx}px, ${this.posy}px)`;
@@ -53,7 +59,7 @@ class Game {
         this.statusbar = document.getElementsByTagName("bar")[0];
         this.bombs = new Array();
         this.car = new Car();
-        for (let i = 0; i < 4; i++) {
+        for (let i = 0; i < 3; i++) {
             this.bombs.push(new Bomb());
         }
         this.gameLoop();

@@ -15,7 +15,7 @@ class Game {
         this.bombs = new Array()
         this.car = new Car()
 
-        for(let i = 0; i < 4 ; i++) {
+        for(let i = 0; i < 3 ; i++) {
             this.bombs.push(new Bomb())
         }
         
