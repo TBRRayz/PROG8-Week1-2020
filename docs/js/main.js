@@ -51,13 +51,18 @@ class Game {
         this.destroyed = 0;
         this.textfield = document.getElementsByTagName("textfield")[0];
         this.statusbar = document.getElementsByTagName("bar")[0];
-        this.bomb = new Bomb();
+        this.bombs = new Array();
         this.car = new Car();
+        for (let i = 0; i < 4; i++) {
+            this.bombs.push(new Bomb());
+        }
         this.gameLoop();
     }
     gameLoop() {
         console.log("updating the game");
-        this.bomb.update();
+        for (let bomb of this.bombs) {
+            bomb.update();
+        }
         this.car.update();
         requestAnimationFrame(() => this.gameLoop());
     }
