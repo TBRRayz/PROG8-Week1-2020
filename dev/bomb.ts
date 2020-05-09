@@ -5,6 +5,7 @@ class Bomb extends GameObject{
     private posy: number = 0
     private posx: number = 0
     private speed: number;
+    private game: Game;
         
     constructor() {
         super()
@@ -23,6 +24,7 @@ class Bomb extends GameObject{
             this.posy = -400
             this.posx = Math.floor(Math.random() * Math.floor(innerWidth))
             this.speed = Math.floor(Math.random() * Math.floor(5) + 1)
+            Game.instance().destroyBuilding();
         }
 
         this.posy = this.posy + this.speed
@@ -33,6 +35,7 @@ class Bomb extends GameObject{
         this.posy = -400
         this.posx = Math.floor(Math.random() * Math.floor(innerWidth))
         this.speed = Math.floor(Math.random() * Math.floor(5) + 1)
+        Game.instance().scorePoint();
     }
 
     public draw() {
